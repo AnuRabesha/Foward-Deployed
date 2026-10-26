@@ -1,0 +1,17 @@
+{
+  "finance_report_q1.md": {
+    "department": "finance",
+    "access_tier": "internal",
+    "date": "2024-03-31"
+  },
+  "employees.csv": {
+    "department": "hr",
+    "access_tier": "confidential",
+    "date": "2024-01-01"
+  },
+  "hr_policy.md": {
+    "department": "hr",
+    "access_tier": "public",
+    "date": "2024-01-01"
+  }
+}

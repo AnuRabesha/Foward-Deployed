@@ -1,0 +1,6 @@
+employee_id,name,department,role,salary,start_date
+E001,Alice Johnson,Engineering,Senior Engineer,120000,2021-03-15
+E002,Bob Smith,Marketing,Marketing Manager,95000,2020-07-01
+E003,Carol White,Finance,Financial Analyst,88000,2022-01-10
+E004,David Lee,Engineering,DevOps Engineer,110000,2019-11-20
+E005,Eva Martinez,HR,HR Specialist,75000,2023-05-05

@@ -1,0 +1,14 @@
+chromadb>=0.4.22
+sentence-transformers>=2.7.0
+pypdf>=4.2.0
+pandas>=2.2.0
+tiktoken>=0.7.0
+tqdm>=4.66.0
+# API layer
+fastapi>=0.111.0
+uvicorn[standard]>=0.29.0
+pydantic>=2.7.0
+# Observability
+prometheus-client>=0.20.0
+# Secrets
+python-dotenv>=1.0.1

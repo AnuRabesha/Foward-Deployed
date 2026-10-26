@@ -1,0 +1,7 @@
+# Normalise all text files to LF in the repo
+* text=auto eol=lf
+
+# Force binary files to never be modified
+*.png binary
+*.jpg binary
+*.pdf binary

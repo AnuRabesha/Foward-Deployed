@@ -1,0 +1,53 @@
+version: "3.9"
+
+services:
+
+  # ── AI Platform API ─────────────────────────────────────────────────────────
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: runtime
+    image: datheon-ai:latest
+    container_name: datheon_app
+    env_file:
+      - .env                          # secrets injected at runtime, never baked in
+    environment:
+      CHROMA_DB_PATH: /app/chroma_db
+      APP_VERSION: "1.0.0"
+    ports:
+      - "8000:8000"
+    volumes:
+      - chroma_data:/app/chroma_db    # persist vector store across restarts
+      - ./sample_docs:/app/sample_docs:ro
+      - ./manifest.json:/app/manifest.json:ro
+    healthcheck:
+      test: ["CMD", "python", "-c",
+             "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    restart: unless-stopped
+    depends_on:
+      - prometheus
+
+  # ── Prometheus ──────────────────────────────────────────────────────────────
+  prometheus:
+    image: prom/prometheus:v2.51.0
+    container_name: datheon_prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    ports:
+      - "9090:9090"
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.path=/prometheus"
+      - "--storage.tsdb.retention.time=15d"
+      - "--web.enable-lifecycle"
+    restart: unless-stopped
+
+volumes:
+  chroma_data:
+  prometheus_data:
